@@ -10,7 +10,7 @@ effectPlot_mvJointModelBayes <- function (mvJMbayesObject, newdata, orig_data) {
   Terms <- lapply(form, FUN = function (x) delete.response(terms(x)))
   mfX <- lapply(Terms, FUN = function (x) model.frame(x, data = orig_data))
   Terms_new <- lapply(mfX, FUN = function (x) attr(x, "terms"))
-  xlev <- mapply(FUN = function (x, y) .getXlevels(x, y), Terms, mfX)
+  xlev <- mapply(FUN = function (x, y) .getXlevels(x, y), Terms, mfX, SIMPLIFY = FALSE)
   mfX_new <- mapply(FUN = function (x, y) model.frame(x, data = newdata, 
                                                       xlev = y), Terms_new, xlev, 
                     SIMPLIFY = FALSE)
